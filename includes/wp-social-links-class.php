@@ -51,6 +51,19 @@ class WP_Social_Links_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		// processes widget options to be saved
+		$instance = [
+			'facebook_link' => ( ! empty( $new_instance['facebook_link'] ) ) ? strip_tags( $new_instance['facebook_link'] ) : '',
+			'facebook_icon' => ( ! empty( $new_instance['facebook_icon'] ) ) ? strip_tags( $new_instance['facebook_icon'] ) : '',
+			'twitter_link'  => ( ! empty( $new_instance['twitter_link'] ) ) ? strip_tags( $new_instance['twitter_link'] ) : '',
+			'twitter_icon'  => ( ! empty( $new_instance['twitter_icon'] ) ) ? strip_tags( $new_instance['twitter_icon'] ) : '',
+			'google_link'   => ( ! empty( $new_instance['google_link'] ) ) ? strip_tags( $new_instance['google_link'] ) : '',
+			'google_icon'   => ( ! empty( $new_instance['google_icon'] ) ) ? strip_tags( $new_instance['google_icon'] ) : '',
+			'linkedin_link' => ( ! empty( $new_instance['linkedin_link'] ) ) ? strip_tags( $new_instance['linkedin_link'] ) : '',
+			'linkedin_icon' => ( ! empty( $new_instance['linkedin_icon'] ) ) ? strip_tags( $new_instance['linkedin_icon'] ) : '',
+			'icon_width'     => ( ! empty( $new_instance['icon_width'] ) ) ? strip_tags( $new_instance['icon_width'] ) : '',
+		];
+
+		return $instance;
 	}
 
 	/**
@@ -136,7 +149,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 		<input type="text" class="widefat" id="<?= $this->get_field_id( 'facebook_icon' ) ?>"
 		       name="<?= $this->get_field_name( 'facebook_icon' ) ?>" value="<?= esc_attr( $facebook_icon ) ?>">
 		</p>
-		
+
 		<h4>Twitter</h4>
 
 		<p>
@@ -150,7 +163,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 		<input type="text" class="widefat" id="<?= $this->get_field_id( 'twitter_icon' ) ?>"
 		       name="<?= $this->get_field_name( 'twitter_icon' ) ?>" value="<?= esc_attr( $twitter_icon ) ?>">
 		</p>
-		
+
 		<h4>Linkedin</h4>
 
 		<p>
@@ -164,7 +177,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 		<input type="text" class="widefat" id="<?= $this->get_field_id( 'linkedin_icon' ) ?>"
 		       name="<?= $this->get_field_name( 'linkedin_icon' ) ?>" value="<?= esc_attr( $linkedin_icon ) ?>">
 		</p>
-		
+
 		<h4>Google Plus</h4>
 
 		<p>
@@ -174,7 +187,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?= $this->get_field_id( 'google_icon' ) ?>"><?= __( 'google Icon' ) ?></label></p>
+			<label for="<?= $this->get_field_id( 'google_icon' ) ?>"><?= __( 'Google Icon' ) ?></label></p>
 		<input type="text" class="widefat" id="<?= $this->get_field_id( 'google_icon' ) ?>"
 		       name="<?= $this->get_field_name( 'google_icon' ) ?>" value="<?= esc_attr( $google_icon ) ?>">
 		</p>
