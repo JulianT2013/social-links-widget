@@ -26,9 +26,28 @@ class WP_Social_Links_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		?>
-		TEST FRONTEND;
-		<?php
+		$links = [
+			'facebook' => esc_attr( $instance['facebook_link'] ),
+			'twitter'  => esc_attr( $instance['twitter_link'] ),
+			'linkedin' => esc_attr( $instance['linkedin_link'] ),
+			'google'   => esc_attr( $instance['google_link'] ),
+		];
+
+		$icons = [
+			'facebook' => esc_attr( $instance['facebook_icon'] ),
+			'twitter'  => esc_attr( $instance['twitter_icon'] ),
+			'linkedin' => esc_attr( $instance['linkedin_icon'] ),
+			'google'   => esc_attr( $instance['google_icon'] ),
+		];
+
+		$icon_width = $instance['icon_width'];
+
+		echo $args['before_widget'];
+
+		/* Call Frontend Function */
+		$this->getSocialLinks( $links, $icons, $icon_width );
+
+		echo $args['after_widget'];
 	}
 
 	/**
@@ -60,7 +79,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 			'google_icon'   => ( ! empty( $new_instance['google_icon'] ) ) ? strip_tags( $new_instance['google_icon'] ) : '',
 			'linkedin_link' => ( ! empty( $new_instance['linkedin_link'] ) ) ? strip_tags( $new_instance['linkedin_link'] ) : '',
 			'linkedin_icon' => ( ! empty( $new_instance['linkedin_icon'] ) ) ? strip_tags( $new_instance['linkedin_icon'] ) : '',
-			'icon_width'     => ( ! empty( $new_instance['icon_width'] ) ) ? strip_tags( $new_instance['icon_width'] ) : '',
+			'icon_width'    => ( ! empty( $new_instance['icon_width'] ) ) ? strip_tags( $new_instance['icon_width'] ) : '',
 		];
 
 		return $instance;
@@ -125,7 +144,7 @@ class WP_Social_Links_Widget extends WP_Widget {
 		if ( isset( $instance['google_icon'] ) ) {
 			$google_icon = esc_attr( $instance['google_icon'] );
 		} else {
-			$google_icon = plugins_url() . '/wp-social-links/img/google-plus.png';
+			$google_icon = plugins_url() . '/wp-social-links/img/google.png';
 		}
 
 		/* Get Icon Size */
@@ -200,5 +219,27 @@ class WP_Social_Links_Widget extends WP_Widget {
 
 		<?php
 	}
-}
 
+	/**
+	 * Gets and Displays Socials Icons
+	 *
+	 * @param $links
+	 * @param $icons
+	 * @param $icon_width
+	 */
+	public function getSocialLinks( $links, $icons, $icon_width ) {
+		?>
+		<div class="social-links">
+			<a target="_blank" href="<?= esc_attr( $links['facebook'] ) ?>"><img
+						src="<?= esc_attr( $icons['facebook'] ) ?> " width="<?= esc_attr( $icon_width ) ?>"></a>
+			<a target="_blank" href="<?= esc_attr( $links['twitter'] ) ?>"><img
+						src="<?= esc_attr( $icons['twitter'] ) ?> " width="<?= esc_attr( $icon_width ) ?>"></a>
+			<a target="_blank" href="<?= esc_attr( $links['linkedin'] ) ?>"><img
+						src="<?= esc_attr( $icons['linkedin'] ) ?> " width="<?= esc_attr( $icon_width ) ?>"></a>
+			<a target="_blank" href="<?= esc_attr( $links['google'] ) ?>"><img
+						src="<?= esc_attr( $icons['google'] ) ?> " width="<?= esc_attr( $icon_width ) ?>"></a>
+		</div>
+
+		<?php
+	}
+}
